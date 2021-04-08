@@ -1,83 +1,72 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
+import CharacterBio from "../../components/CharacterBio";
 
 const Character = ({ character }) => {
-  const router = useRouter();
-  const { id } = router.query;
-
-  const {
-    name,
-    birth_year,
-    eye_color,
-    hair_color,
-    height,
-    mass,
-    films,
-    gender,
-    homeworld,
-    skin_color,
-    species,
-    starships,
-    vehicles,
-    url,
-  } = character;
-
+  console.log(character)
+  
   return (
     <>
       <Head>
         <title>{character.name}</title>
       </Head>
       <main>
-        <h4>Character Profile</h4>
-        <h1>{name}</h1>
-        {gender !== 'n/a' && <p>{gender}</p>}
-        <p>Born: {birth_year}</p>
-        <p>Height: {height} cm</p>
-        <p>Weight: {mass} kg</p>
-        <p>Hair color: {hair_color}</p>
-        <p>Eye color: {eye_color}</p>
-        <p>Species: LOGIC IN API GATEWAY</p>
-        <p>Homeworld: LOGIC IN API GATEWAY</p>
-
-        <p>Appears in: LOGIC IN API GATEWAY</p>
-        <p>Starships: LOGIC IN API GATEWAY</p>
-        <p>Vehicles: LOGIC IN API GATEWAY</p>
+        <CharacterBio character={character} />
       </main>
     </>
   );
 };
 
-// static gen method
-export const getStaticProps = async ({ params }) => {
-  const request = await fetch(`http://localhost:3000/${params.id}.json`);
-  const data = await request.json();
-//   if (!data) {
-//     return {
-//       notFound: true,
-//     };
-//   }
+export const getServerSideProps = async ({params}) => {
+  // this call to api to construct other proxy calls
+  // const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
+  const request = await fetch(`http://localhost:3000/api/characters/${params.id}`)
+  const response = await request.json();
+  const data = response.data
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: { character: data },
   };
 };
 
-// needs to know the ids in advance, or number of routes
-export const getStaticPaths = async () => {
-  const request = await fetch(`http://localhost:3000/characters.json`);
-  const data = await request.json();
-
-  console.log(data);
-
-  const paths = data.map(name => {
-    return { params: { id: name } };
-  });
-
-  return {
-    paths,
-    // TODO add fallback for error handling
-    fallback: false,
-  };
-};
-
 export default Character;
+
+// export const getStaticProps = async ({ params }) => {
+//   const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
+//   const data = await request.json();
+
+//   if (!data) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+
+//   return {
+//     props: { character: data },
+//   };
+// };
+
+// export const getStaticPaths = async () => {
+//   const request = await fetch(`http://localhost:3000/api/characters/`);
+//   const response = await request.json();
+//   const results = response.data;
+
+//   const paths = results.map(char => {
+//     const splitUrl = char.url.split("/");
+//     const id = splitUrl[splitUrl.length - 2];
+//     return { params: { id: id } };
+//   });
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
+
