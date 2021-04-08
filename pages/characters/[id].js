@@ -1,72 +1,29 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
+import CharacterBio from "../../components/CharacterBio";
 
 const Character = ({ character }) => {
-  const router = useRouter();
-  const { id } = router.query;
-
-  const {
-    name,
-    birth_year,
-    eye_color,
-    hair_color,
-    height,
-    mass,
-    films,
-    gender,
-    homeworld,
-    skin_color,
-    species,
-    starships,
-    vehicles,
-    url,
-  } = character;
-
+  console.log(character)
+  
   return (
     <>
       <Head>
         <title>{character.name}</title>
       </Head>
       <main>
-        <h4>Character Profile</h4>
-        <h1>{name}</h1>
-        {gender !== "n/a" && <p>{gender}</p>}
-        <p>Born: {birth_year}</p>
-        <p>Height: {height} cm</p>
-        <p>Weight: {mass} kg</p>
-        <p>Hair color: {hair_color}</p>
-        <p>Eye color: {eye_color}</p>
-        <p>Species: LOGIC IN API GATEWAY</p>
-        <p>Homeworld: LOGIC IN API GATEWAY</p>
-
-        <p>Appears in: LOGIC IN API GATEWAY</p>
-        <p>Starships: LOGIC IN API GATEWAY</p>
-        <p>Vehicles: LOGIC IN API GATEWAY</p>
+        <CharacterBio character={character} />
       </main>
     </>
   );
 };
 
-// static gen method
-// export const getServerSideProps = async ({ params }) => {
-//   const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
-//   const data = await request.json();
-  
-//   if (!data) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-  
-//   return {
-//     props: { character: data },
-//   };
-// }
-
-export const getStaticProps = async ({ params }) => {
-  const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
-  const data = await request.json();
+export const getServerSideProps = async ({params}) => {
+  // this call to api to construct other proxy calls
+  // const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
+  const request = await fetch(`http://localhost:3000/api/characters/${params.id}`)
+  const response = await request.json();
+  const data = response.data
 
   if (!data) {
     return {
@@ -79,54 +36,27 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths = async () => {
+export default Character;
 
-  const endpoint = "https://swapi.dev/api/people/";
-  
-  const getCharacterList = async (pageNo = 1) => {
-    const actualUrl = endpoint + `?page=${pageNo}`;
-    const request = await fetch(actualUrl)
-    const data = await request.json()
-    const results = data.results
-    
-    return results;
-  }
-  
-  const getEntireCharacterList = async (pageNo = 1) => {
-    const results = await getCharacterList(pageNo);
-    console.log("Retrieving data from API for page : " + pageNo);
-    if (!results) {
-      return;
-    } else {
-      const nextPage = await getEntireCharacterList(pageNo + 1)
-      if (!nextPage) {
-        return results
-      } else {
-        return results.concat(nextPage);
-      }
-    }
-  };
- 
-  const results = await getEntireCharacterList();
-  console.log(results)
-
-  const paths = results.map(char => {
-    const splitUrl = char.url.split("/");
-    const id = splitUrl[splitUrl.length - 2];
-    return { params: { id: id } };
-  });
-
-  return {
-    paths,
-    // TODO add fallback for error handling
-    fallback: false,
-  };
-}
-
-// export const getStaticPaths = async (next = 1) => {
-//   const request = await fetch(`https://swapi.dev/api/people/?page=1`);
+// export const getStaticProps = async ({ params }) => {
+//   const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
 //   const data = await request.json();
-//   const results = data.results;
+
+//   if (!data) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+
+//   return {
+//     props: { character: data },
+//   };
+// };
+
+// export const getStaticPaths = async () => {
+//   const request = await fetch(`http://localhost:3000/api/characters/`);
+//   const response = await request.json();
+//   const results = response.data;
 
 //   const paths = results.map(char => {
 //     const splitUrl = char.url.split("/");
@@ -134,13 +64,9 @@ export const getStaticPaths = async () => {
 //     return { params: { id: id } };
 //   });
 
-//   console.log(paths);
-
 //   return {
 //     paths,
-//     // TODO add fallback for error handling
 //     fallback: false,
 //   };
 // };
 
-export default Character;
