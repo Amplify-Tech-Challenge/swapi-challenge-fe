@@ -6,11 +6,12 @@ export default async (req, res) => {
   try {
     const request = await fetch(`https://swapi.dev/api/people/${id}`);
     const data = await request.json();
-    const compiledData = buildCharacterDetails(data);
+    const compiledData = await buildCharacterDetails(data);
 
     res.setHeader("Content-Type", "application/json");
     res.status(200).json({ data: compiledData });
     res.end();
+
   } catch (e) {
     res.status(400).end();
   }
@@ -18,7 +19,6 @@ export default async (req, res) => {
 
 const buildCharacterDetails = async character => {
   // TODO refactor to check w/object.keys, push into array
-
   const { homeworld, films, species, vehicles, starships } = character;
   const endpoints = [
     { homeworld },
@@ -29,35 +29,25 @@ const buildCharacterDetails = async character => {
   ];
 
   const fetchedPropertyData = await endpoints.reduce(
-    async (promises, objProperty) => {
+    async (newObj, objProperty) => {
       const key = Object.keys(objProperty);
       const endpoint = objProperty[key];
-      const newFetchedData = await promises;
 
       if (checkType(endpoint) === "array") {
-        // parse out each item in the array
-        // fetchedPropertyData
       } else if (checkType(endpoint) === "string") {
         const data = await fetchQuery(null, null, endpoint);
-        // console.log('key', key);
-        // console.log('data', data);
-        newFetchedData.push({ [key]: data });
+        newObj[key] = data
       } else {
       }
-      return promises;
+      return newObj;
     },
-    []
+    character
   );
 
-  // console.log("compiled accumulator", fetchedPropertyData);
 
-  const compiled = { ...character, ...fetchedPropertyData };
-
-  console.log("fetched properties", ...fetchedPropertyData);
   console.log("character", character);
-  console.log("compiled character", compiled);
 
-  return compiled;
+  return character;
 };
 
 const checkType = propertyValue => {
