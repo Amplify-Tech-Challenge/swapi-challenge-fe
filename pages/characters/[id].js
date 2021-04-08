@@ -49,39 +49,53 @@ const Character = ({ character }) => {
 };
 
 // static gen method
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }) => {
   const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
   const data = await request.json();
-
+  
   if (!data) {
     return {
       notFound: true,
     };
   }
-
+  
   return {
     props: { character: data },
   };
-};
+}
+// export const getStaticProps = async ({ params }) => {
+//   const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
+//   const data = await request.json();
 
-export const getStaticPaths = async () => {
-  const request = await fetch(`https://swapi.dev/api/people/?page=1`);
-  const data = await request.json();
-  const results = data.results;
+//   if (!data) {
+//     return {
+//       notFound: true,
+//     };
+//   }
 
-  const paths = results.map(char => {
-    const splitUrl = char.url.split("/");
-    const id = splitUrl[splitUrl.length - 2];
-    return { params: { id: id } };
-  });
+//   return {
+//     props: { character: data },
+//   };
+// };
 
-  console.log(paths);
+// export const getStaticPaths = async (next = 1) => {
+//   const request = await fetch(`https://swapi.dev/api/people/?page=1`);
+//   const data = await request.json();
+//   const results = data.results;
 
-  return {
-    paths,
-    // TODO add fallback for error handling
-    fallback: false,
-  };
-};
+//   const paths = results.map(char => {
+//     const splitUrl = char.url.split("/");
+//     const id = splitUrl[splitUrl.length - 2];
+//     return { params: { id: id } };
+//   });
+
+//   console.log(paths);
+
+//   return {
+//     paths,
+//     // TODO add fallback for error handling
+//     fallback: false,
+//   };
+// };
 
 export default Character;
