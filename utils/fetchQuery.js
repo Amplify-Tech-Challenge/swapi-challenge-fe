@@ -1,12 +1,14 @@
 const baseUrl = process.env.BASE_URL;
 
-async function fetchQuery(path, params = null) {
+async function fetchQuery(path, params = null, endpoint) {
   let url;
 
   if (params !== null) {
     url = `${baseUrl}/${path}/${params}`;
-  } else {
+  } else if (path !== null) {
     url = `${baseUrl}/${path}`;
+  } else {
+    url = endpoint
   }
 
   const response = await fetch(`${url}`);
