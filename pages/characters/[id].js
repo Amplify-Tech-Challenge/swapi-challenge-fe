@@ -31,7 +31,7 @@ const Character = ({ character }) => {
       <main>
         <h4>Character Profile</h4>
         <h1>{name}</h1>
-        {gender !== 'n/a' && <p>{gender}</p>}
+        {gender !== "n/a" && <p>{gender}</p>}
         <p>Born: {birth_year}</p>
         <p>Height: {height} cm</p>
         <p>Weight: {mass} kg</p>
@@ -50,24 +50,32 @@ const Character = ({ character }) => {
 
 // static gen method
 export const getStaticProps = async ({ params }) => {
-  const request = await fetch(`http://localhost:3000/${params.id}.json`);
+  const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
   const data = await request.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: { character: data },
   };
 };
 
-// needs to know the ids in advance, or number of routes
 export const getStaticPaths = async () => {
-  const request = await fetch(`http://localhost:3000/characters.json`);
+  const request = await fetch(`https://swapi.dev/api/people/?page=1`);
   const data = await request.json();
+  const results = data.results;
 
-  console.log(data);
-
-  const paths = data.map(name => {
-    return { params: { id: name } };
+  const paths = results.map(char => {
+    const splitUrl = char.url.split("/");
+    const id = splitUrl[splitUrl.length - 2];
+    return { params: { id: id } };
   });
+
+  console.log(paths);
 
   return {
     paths,
