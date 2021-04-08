@@ -5,11 +5,11 @@ import CharacterBio from "../../components/CharacterBio";
 
 const Character = ({ character }) => {
   console.log(character)
-  
+
   return (
     <>
       <Head>
-        <title>{character.name}</title>
+        <title>Bio | {character.name}</title>
       </Head>
       <main>
         <CharacterBio character={character} />
