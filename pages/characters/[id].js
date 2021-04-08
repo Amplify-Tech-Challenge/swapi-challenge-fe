@@ -49,34 +49,79 @@ const Character = ({ character }) => {
 };
 
 // static gen method
-export const getServerSideProps = async ({ params }) => {
-  const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
-  const data = await request.json();
-  
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
-  
-  return {
-    props: { character: data },
-  };
-}
-// export const getStaticProps = async ({ params }) => {
+// export const getServerSideProps = async ({ params }) => {
 //   const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
 //   const data = await request.json();
-
+  
 //   if (!data) {
 //     return {
 //       notFound: true,
 //     };
 //   }
-
+  
 //   return {
 //     props: { character: data },
 //   };
-// };
+// }
+
+export const getStaticProps = async ({ params }) => {
+  const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
+  const data = await request.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { character: data },
+  };
+};
+
+export const getStaticPaths = async () => {
+
+  const endpoint = "https://swapi.dev/api/people/";
+  
+  const getCharacterList = async (pageNo = 1) => {
+    const actualUrl = endpoint + `?page=${pageNo}`;
+    const request = await fetch(actualUrl)
+    const data = await request.json()
+    const results = data.results
+    
+    return results;
+  }
+  
+  const getEntireCharacterList = async (pageNo = 1) => {
+    const results = await getCharacterList(pageNo);
+    console.log("Retrieving data from API for page : " + pageNo);
+    if (!results) {
+      return;
+    } else {
+      const nextPage = await getEntireCharacterList(pageNo + 1)
+      if (!nextPage) {
+        return results
+      } else {
+        return results.concat(nextPage);
+      }
+    }
+  };
+ 
+  const results = await getEntireCharacterList();
+  console.log(results)
+
+  const paths = results.map(char => {
+    const splitUrl = char.url.split("/");
+    const id = splitUrl[splitUrl.length - 2];
+    return { params: { id: id } };
+  });
+
+  return {
+    paths,
+    // TODO add fallback for error handling
+    fallback: false,
+  };
+}
 
 // export const getStaticPaths = async (next = 1) => {
 //   const request = await fetch(`https://swapi.dev/api/people/?page=1`);
