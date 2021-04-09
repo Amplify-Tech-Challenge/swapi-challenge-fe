@@ -28,21 +28,35 @@ const buildCharacterDetails = async character => {
     { starships },
   ];
 
-  const fetchedPropertyData = await endpoints.reduce(
+  await endpoints.reduce(
     async (newObj, objProperty) => {
       const key = Object.keys(objProperty);
       const endpoint = objProperty[key];
 
       if (checkType(endpoint) === "array") {
+        const compiledArray = await endpoint.reduce(async (promises, el) => {
+          const acc = await promises
+          const data = await fetchQuery(null, null, el);
+          acc.push(data)
+          // console.log('acc',promises)
+          // console.log('fetched object', fetchedObj)
+          return acc
+        }, [])
+        newObj[key] = compiledArray
+        // console.log('IF BLOCK',endpoint)
+        // console.log('IF BLOCK',key)
+        // console.log('IF BLOCK',compiledArray)
+
       } else if (checkType(endpoint) === "string") {
         const data = await fetchQuery(null, null, endpoint);
         newObj[key] = data
+
       } else {
       }
+
       return newObj;
-    },
-    character
-  );
+    }, 
+  character);
 
 
   console.log("character", character);
@@ -51,19 +65,14 @@ const buildCharacterDetails = async character => {
 };
 
 const checkType = propertyValue => {
-  // let key = Object.keys(objProperty)
-  // if (Array.isArray(objProperty[key]) && objProperty[key].length) {
   if (Array.isArray(propertyValue) && propertyValue.length) {
     console.log("valid array of endpoints");
     return "array";
 
-    // } else if (typeof objProperty[key] === 'string' && objProperty[key].split('/')[0] === 'http:') {
-  } else if (
-    typeof propertyValue === "string" &&
-    propertyValue.split("/")[0] === "http:"
-  ) {
+  } else if (typeof propertyValue === "string" && propertyValue.split("/")[0] === "http:") {
     console.log("valid single endpoint");
     return "string";
+
   } else {
     console.log("no endpoints");
     return false;
