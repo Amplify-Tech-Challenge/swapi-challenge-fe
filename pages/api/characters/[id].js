@@ -39,31 +39,19 @@ const buildCharacterDetails = async character => {
           const acc = await promises
           const data = await fetchQuery(null, null, el);
           acc.push(data)
-          // console.log('acc',promises)
-          // console.log('fetched object', fetchedObj)
           return acc
         }, [])
         newObj[key] = compiledArray
-        // console.log('IF BLOCK',endpoint)
-        // console.log('IF BLOCK',newObj)
-        // console.log('IF BLOCK',key)
-        // console.log('IF BLOCK PROP',newObj[key])
-        // console.log('IF BLOCK',compiledArray)
 
       } else if (checkType(endpoint) === "string") {
         const data = await fetchQuery(null, null, endpoint);
         newObj[key] = data
-
-      } else {
-      }
-
+      } 
       return newObj;
     }, 
   character);
 
-
   console.log("character", character);
-
   return character;
 };
 

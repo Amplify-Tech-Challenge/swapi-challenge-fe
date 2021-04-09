@@ -24,8 +24,9 @@ const CharacterBio = ({character}) => {
       <p>Born: {birth_year}</p>
       <p>Height: {height} cm</p>
       <p>Weight: {mass} kg</p>
-      <p>Hair color: {hair_color}</p>
-      <p>Eye color: {eye_color}</p>
+      <p>Hair: {hair_color}</p>
+      <p>Skin: {skin_color}</p>
+      <p>Eyes: {eye_color}</p>
       <p>Species: {species[0]?.name}</p>
       <p>Homeworld: {homeworld.name}</p>
 
