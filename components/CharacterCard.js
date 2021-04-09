@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { baseUrl } from "../utils/fetchQuery";
 
 const CharacterCard = ({ character }) => {
   return (
