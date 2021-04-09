@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import CharacterBio from "../../components/CharacterBio";
+const API_URL = process.env.RESTURL_MYAPI
 
 const Character = ({ character }) => {
   console.log(character)
@@ -21,7 +22,7 @@ const Character = ({ character }) => {
 export const getServerSideProps = async ({params}) => {
   // this call to api to construct other proxy calls
   // const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
-  const request = await fetch(`http://localhost:3000/api/characters/${params.id}`)
+  const request = await fetch(`${API_URL}/characters/${params.id}`)
   const response = await request.json();
   const data = response.data
 
@@ -39,7 +40,7 @@ export const getServerSideProps = async ({params}) => {
 export default Character;
 
 // export const getStaticProps = async ({ params }) => {
-//   const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
+//   const request = await fetch(`${API_URL}/characters/${params.id}`);
 //   const data = await request.json();
 
 //   if (!data) {
@@ -54,7 +55,7 @@ export default Character;
 // };
 
 // export const getStaticPaths = async () => {
-//   const request = await fetch(`http://localhost:3000/api/characters/`);
+//   const request = await fetch(`${API_URL}/characters/`);
 //   const response = await request.json();
 //   const results = response.data;
 

@@ -28,6 +28,10 @@ const buildCharacterDetails = async character => {
     { starships },
   ];
 
+  //TODO pop out empty/invalid arrays
+  //TODO consider purposeful breaks
+  // get only whats asked
+
   await endpoints.reduce(
     async (promises, objProperty) => {
       const newObj = await promises

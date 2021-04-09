@@ -1,4 +1,5 @@
 import CharacterCard from "../../components/CharacterCard";
+const API_URL = process.env.RESTURL_MYAPI
 
 const CharacterList = ({ characters }) => {
   console.log(characters);
@@ -33,7 +34,7 @@ export const getServerSideProps = async () => {
   // will load up a page of movies, can append more with 'load more'
   // search field will make api call and load SW card components with information/cancel previously typed letter
 
-  const request = await fetch(`http://localhost:3000/api/characters/`);
+  const request = await fetch(`${API_URL}/characters/`);
   const response = await request.json()
   const data = response.data
 

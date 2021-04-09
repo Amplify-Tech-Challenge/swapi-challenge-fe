@@ -1,4 +1,4 @@
-const baseUrl = process.env.BASE_URL;
+const baseUrl = "https://swapi.dev/api"
 
 async function fetchQuery(path, params = null, endpoint) {
   let url;
