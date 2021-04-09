@@ -26,12 +26,12 @@ const CharacterBio = ({character}) => {
       <p>Weight: {mass} kg</p>
       <p>Hair color: {hair_color}</p>
       <p>Eye color: {eye_color}</p>
-      <p>Species: LOGIC IN API GATEWAY</p>
+      <p>Species: {species[0]?.name}</p>
       <p>Homeworld: {homeworld.name}</p>
 
-      <p>Appears in: LOGIC IN API GATEWAY</p>
-      <p>Starships: LOGIC IN API GATEWAY</p>
-      <p>Vehicles: LOGIC IN API GATEWAY</p>
+      <p>Appears in: 1st {films[0]?.title}</p>
+      <p>Starships: {starships[0]?.name}</p>
+      <p>Vehicles: {vehicles[0]?.name}</p>
     </section>
   );
 }
