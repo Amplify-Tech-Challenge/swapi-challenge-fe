@@ -18,7 +18,7 @@ module.exports = (phase) => {
       if (isProd) {
         return 'https://swapi-challenge-fe.vercel.app/api'
       }
-      if (isStaging) return 'swapi-challenge-fe-staging.vercel.app/api'
+      if (isStaging) return 'https://swapi-challenge-fe-staging.vercel.app/api'
       return 'RESTURL_SPEAKERS:not (isDev,isProd && !isStaging,isProd && isStaging)'
     })()
   }
