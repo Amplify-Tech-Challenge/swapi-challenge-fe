@@ -29,7 +29,8 @@ const buildCharacterDetails = async character => {
   ];
 
   await endpoints.reduce(
-    async (newObj, objProperty) => {
+    async (promises, objProperty) => {
+      const newObj = await promises
       const key = Object.keys(objProperty);
       const endpoint = objProperty[key];
 
@@ -44,7 +45,9 @@ const buildCharacterDetails = async character => {
         }, [])
         newObj[key] = compiledArray
         // console.log('IF BLOCK',endpoint)
+        // console.log('IF BLOCK',newObj)
         // console.log('IF BLOCK',key)
+        // console.log('IF BLOCK PROP',newObj[key])
         // console.log('IF BLOCK',compiledArray)
 
       } else if (checkType(endpoint) === "string") {
