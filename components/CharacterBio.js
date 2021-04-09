@@ -27,7 +27,7 @@ const CharacterBio = ({character}) => {
       <p>Hair color: {hair_color}</p>
       <p>Eye color: {eye_color}</p>
       <p>Species: LOGIC IN API GATEWAY</p>
-      <p>Homeworld: LOGIC IN API GATEWAY</p>
+      <p>Homeworld: {homeworld.name}</p>
 
       <p>Appears in: LOGIC IN API GATEWAY</p>
       <p>Starships: LOGIC IN API GATEWAY</p>
