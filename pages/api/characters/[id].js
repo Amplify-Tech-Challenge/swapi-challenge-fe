@@ -9,7 +9,7 @@ export default async (req, res) => {
     const compiledData = await buildCharacterDetails(data);
 
     res.setHeader("Content-Type", "application/json");
-    res.status(200).json({ data: compiledData });
+    res.status(200).json(JSON.stringify({ data: compiledData }));
     res.end();
 
   } catch (e) {
