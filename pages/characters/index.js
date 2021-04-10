@@ -30,7 +30,8 @@ const CharacterList = ({ characters }) => {
   );
 };
 
-export const getServerSideProps = async () => {
+// export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   // will load up a page of movies, can append more with 'load more'
   // search field will make api call and load SW card components with information/cancel previously typed letter
 

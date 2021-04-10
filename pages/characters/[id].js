@@ -19,7 +19,7 @@ const Character = ({ character }) => {
   );
 };
 
-export const getServerSideProps = async ({params}) => {
+export const getStaticProps = async ({params}) => {
   // this call to api to construct other proxy calls
   // const request = await fetch(`https://swapi.dev/api/people/${params.id}`);
   const request = await fetch(`${API_URL}/characters/${params.id}`)
@@ -54,20 +54,20 @@ export default Character;
 //   };
 // };
 
-// export const getStaticPaths = async () => {
-//   const request = await fetch(`${API_URL}/characters/`);
-//   const response = await request.json();
-//   const results = response.data;
+export const getStaticPaths = async () => {
+  const request = await fetch(`${API_URL}/characters/`);
+  const response = await request.json();
+  const results = response.data;
 
-//   const paths = results.map(char => {
-//     const splitUrl = char.url.split("/");
-//     const id = splitUrl[splitUrl.length - 2];
-//     return { params: { id: id } };
-//   });
+  const paths = results.map(char => {
+    const splitUrl = char.url.split("/");
+    const id = splitUrl[splitUrl.length - 2];
+    return { params: { id: id } };
+  });
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
+  return {
+    paths,
+    fallback: false,
+  };
+};
 

@@ -1,6 +1,6 @@
 const Home = () => {
   return ( 
-    <h1>Hey there</h1>
+    <h1>SWAPI CHALLENGE LANDING</h1>
    );
 }
  
