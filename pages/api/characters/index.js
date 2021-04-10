@@ -1,6 +1,6 @@
 // import getCharacters from "../../../utils/getCharacters";
 
-export default async (req, res) => {
+export default (req, res) => {
   try {
   //   const data = await getCharacters("test");
   //   res.setHeader("Content-Type", "application/json");
@@ -12,4 +12,4 @@ export default async (req, res) => {
   }
 };
 
-// which part of this is invalid json?
+// which part of this is invalid json? WHY DOES HELLO WORK????
