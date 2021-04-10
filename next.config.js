@@ -4,6 +4,9 @@ const {
 } = require('next/constants')
 
 // https://nextjs.org/docs/#custom-configuration
+
+
+
 module.exports = (phase) => {
   const isDev = phase === PHASE_DEVELOPMENT_SERVER
   const isProd = phase === PHASE_PRODUCTION_BUILD && process.env.STAGING !== '1'
@@ -22,8 +25,32 @@ module.exports = (phase) => {
       return 'RESTURL_SPEAKERS:not (isDev,isProd && !isStaging,isProd && isStaging)'
     })()
   }
+  
+  async function headers() {
+    return [
+      {
+        source: '/characters',
+        headers: [
+          {
+            key: 'User-Agent',
+            value: '*',
+          },
+        ],
+      },
+      {
+        source: '/characters/:id',
+        headers: [
+          {
+            key: 'User-Agent',
+            value: '*',
+          },
+        ],
+      },
+    ]
+  }
 
   return {
     env,
+    headers
   }
 }

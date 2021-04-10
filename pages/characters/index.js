@@ -25,23 +25,23 @@ const CharacterList = ({ characters }) => {
   return (
     <>
       <h1>CharacterList</h1>
-      {/* <ul>{makeCharacterList()}</ul> */}
+      <ul>{makeCharacterList()}</ul>
     </>
   );
 };
 
 // export const getServerSideProps = async () => {
-// export const getStaticProps = async () => {
-//   // will load up a page of movies, can append more with 'load more'
-//   // search field will make api call and load SW card components with information/cancel previously typed letter
+export const getStaticProps = async () => {
+  // will load up a page of movies, can append more with 'load more'
+  // search field will make api call and load SW card components with information/cancel previously typed letter
 
-//   const request = await fetch(`${API_URL}/characters/`);
-//   const response = await request.json()
-//   const data = response.data
+  const request = await fetch(`${API_URL}/characters/`);
+  const response = await request.json()
+  const data = response.data
 
-//   return {
-//     props: { characters: data },
-//   };
-// };
+  return {
+    props: { characters: data },
+  };
+};
 
-// export default CharacterList;
+export default CharacterList;
