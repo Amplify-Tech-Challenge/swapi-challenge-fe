@@ -36,8 +36,10 @@ export const getServerSideProps = async () => {
 
   const request = await fetch(`${API_URL}/characters/`);
   const response = await request.json()
-  const data = response.data
-
+  const data = response
+  
+  console.log('resp',response)
+  
   return {
     props: { characters: data },
   };
