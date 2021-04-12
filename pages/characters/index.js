@@ -1,32 +1,29 @@
 import CharacterCard from "../../components/CharacterCard";
-const API_URL = process.env.RESTURL_MYAPI
+const API_URL = process.env.RESTURL_MYAPI;
+import styles from "../../styles/Home.module.css";
 
 const CharacterList = ({ characters }) => {
   console.log(characters);
 
   const makeCharacterList = () => {
-    const getId = (url) => {
+    const getId = url => {
       const splitUrl = url.split("/");
       const id = splitUrl[splitUrl.length - 2];
       return id;
     };
 
     return characters.map(c => {
-      const id = getId(c.url)
-      const characterData = {...c, id}
-      return (
-        <li key={Math.random()}>
-          <CharacterCard character={characterData}/>
-        </li>
-      );
+      const id = getId(c.url);
+      const characterData = { ...c, id };
+      return <CharacterCard key={Math.random()} character={characterData} />;
     });
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <h1>CharacterList</h1>
-      <ul>{makeCharacterList()}</ul>
-    </>
+      {makeCharacterList()}
+    </div>
   );
 };
 
@@ -35,8 +32,8 @@ export const getStaticProps = async () => {
   // search field will make api call and load SW card components with information/cancel previously typed letter
 
   const request = await fetch(`${API_URL}/characters/`);
-  const data = await request.json()
-  
+  const data = await request.json();
+
   return {
     props: { characters: data },
   };
