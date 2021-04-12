@@ -1,5 +1,8 @@
+import useSWR from 'swr';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
+
 
 const SearchContainer = styled.div`
   background: red;
@@ -7,6 +10,8 @@ const SearchContainer = styled.div`
 const SearchInput = styled.input`
   width: 100%;
   height: 3em;
+  font-size: 2em;
+  padding: 1em;
 `
 
 const SearchBar = () => {
@@ -14,7 +19,15 @@ const SearchBar = () => {
 
   const handleChange = (searchTerm) => {
     setInput(searchTerm)
-    console.log(searchTerm)
+    if (searchTerm !== "") findCharacter(searchTerm)
+  }
+
+  const findCharacter = async (term) => {
+    const apiEndpoint = `https://swapi.py4e.com/api/people/?search=${term}`
+    const response = await fetch(apiEndpoint)
+    const parsed = await response.json()
+    const results = parsed.results
+    console.log(results)
   }
 
   return ( 
