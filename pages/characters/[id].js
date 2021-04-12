@@ -52,13 +52,11 @@ export const getStaticProps = async ({ params }) => {
   };
 }
 export const getStaticPaths = async () => {
-  const request = await fetch(`${API_URL}/characters/`);
+  const request = await fetch(`${API_URL}/characters/ssg-paths`);
   const data = await request.json();
 
-  const paths = data.map(char => {
-    const splitUrl = char.url.split("/");
-    const id = splitUrl[splitUrl.length - 2];
-    return { params: { id: id } };
+  const paths = data.map(id => {
+    return { params: { id } };
   });
 
   return {
