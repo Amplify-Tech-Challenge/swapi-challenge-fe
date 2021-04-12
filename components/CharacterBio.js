@@ -14,11 +14,15 @@ const CharacterBio = ({character}) => {
     starships,
     vehicles,
     url,
+    image
   } = character;
+
+  console.log(image)
   
   return (
     <section>
       <h4>Character Profile</h4>
+      <img src={image} alt={name} />
       <h1>{name}</h1>
       {gender !== "n/a" && <p>{gender}</p>}
       <p>Born: {birth_year}</p>
