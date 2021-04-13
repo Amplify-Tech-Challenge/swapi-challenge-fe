@@ -1,31 +1,42 @@
+import React, { useState, useEffect } from 'react';
 import CharacterCard from "../../components/CharacterCard";
-const API_URL = process.env.RESTURL_MYAPI
+const API_URL = process.env.RESTURL_MYAPI;
+import styles from "../../styles/Home.module.css";
+import SearchBar from "../../components/SearchBar";
 
 const CharacterList = ({ characters }) => {
-  console.log(characters);
+  const [searchResults, setSearchResults] = useState([])
+  const [noResults, setNoResults] = useState(null)
+
+  const parseResults = (resultObject) => {
+    setSearchResults(resultObject.results)
+    resultObject.message ? setNoResults(resultObject.message) : setNoResults(null)
+  }
 
   const makeCharacterList = () => {
-    const getId = (url) => {
+    const getId = url => {
       const splitUrl = url.split("/");
       const id = splitUrl[splitUrl.length - 2];
       return id;
     };
 
-    return characters.map(c => {
-      const id = getId(c.url)
-      const characterData = {...c, id}
-      return (
-        <li key={Math.random()}>
-          <CharacterCard character={characterData}/>
-        </li>
-      );
-    });
+    if (searchResults.length) {
+      return searchResults.map(c => {
+        const id = getId(c.url);
+        const characterData = { ...c, id };
+        return <CharacterCard key={Math.random()} character={characterData} />;
+      });
+    }
   };
 
   return (
     <>
-      <h1>CharacterList</h1>
-      <ul>{makeCharacterList()}</ul>
+      <SearchBar getResults={parseResults}/>
+      <div className={styles.container}>
+        {/* TODO break out into separate function to add 'loading'  */}
+        <h1 className={styles.title}>{searchResults.length ? 'Results' : noResults ? noResults : "Search by name above"}</h1>
+        {makeCharacterList()}
+      </div>
     </>
   );
 };
@@ -35,8 +46,8 @@ export const getStaticProps = async () => {
   // search field will make api call and load SW card components with information/cancel previously typed letter
 
   const request = await fetch(`${API_URL}/characters/`);
-  const data = await request.json()
-  
+  const data = await request.json();
+
   return {
     props: { characters: data },
   };

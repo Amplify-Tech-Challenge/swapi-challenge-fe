@@ -1,11 +1,14 @@
 import Link from "next/link";
+import styles from "../styles/Home.module.css";
 
 const CharacterCard = ({ character }) => {
   return (
     <Link key={character.name} href={`/characters/${character.id}`}>
-      <section style={{ cursor: "pointer", border: "solid 1px black" }}>
-        <h1>{character.name}</h1>
-      </section>
+      <div className={styles.grid}>
+        <a href="" className={styles.card}>
+          <h3>{character.name}</h3>
+        </a>
+      </div>
     </Link>
   );
 };
