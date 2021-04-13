@@ -5,7 +5,7 @@ import CharacterBio from "../../components/CharacterBio/CharacterBio";
 const API_URL = process.env.RESTURL_MYAPI
 
 const Character = ({ character }) => {
-  console.log(character)
+  // console.log(character)
 
   return (
     <>
