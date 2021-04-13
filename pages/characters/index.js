@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import CharacterCard from "../../components/CharacterCard";
+import CharacterCard from "../../components/CharacterCard/CharacterCard";
 const API_URL = process.env.RESTURL_MYAPI;
 import styles from "../../styles/Home.module.css";
-import SearchBar from "../../components/SearchBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const CharacterList = ({ characters }) => {
   const [searchResults, setSearchResults] = useState([])

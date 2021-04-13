@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
-import CharacterBio from "../../components/CharacterBio";
+import CharacterBio from "../../components/CharacterBio/CharacterBio";
 const API_URL = process.env.RESTURL_MYAPI
 
 const Character = ({ character }) => {
