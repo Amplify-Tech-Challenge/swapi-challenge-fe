@@ -8,7 +8,6 @@ const CharacterList = ({ characters }) => {
   const [searchResults, setSearchResults] = useState([])
   const [noResults, setNoResults] = useState(null)
 
-
   const parseResults = (resultObject) => {
     setSearchResults(resultObject.results)
     resultObject.message ? setNoResults(resultObject.message) : setNoResults(null)
@@ -34,6 +33,7 @@ const CharacterList = ({ characters }) => {
     <>
       <SearchBar getResults={parseResults}/>
       <div className={styles.container}>
+        {/* TODO break out into separate function to add 'loading'  */}
         <h1 className={styles.title}>{searchResults.length ? 'Results' : noResults ? noResults : "Search by name above"}</h1>
         {makeCharacterList()}
       </div>
