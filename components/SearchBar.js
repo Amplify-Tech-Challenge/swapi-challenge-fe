@@ -11,12 +11,12 @@ const SearchInput = styled.input`
   padding: 1em;
 `;
 
-const SearchBar = () => {
+const SearchBar = ({getResults}) => {
   const [inputString, setInputString] = useState("");
-  const [state, setState] = useState({});
+  const [state, setState] = useState({results:[]});
 
   useEffect(() => {
-    console.log('USEEFFECT',state)
+    getResults(state)
   }, [() => setInputString()])
 
   const handleChange = query => {
@@ -37,7 +37,7 @@ const SearchBar = () => {
       if (results) {
         setState({
           results,
-          message: !results.length ? "No matching results for " + query : "",
+          message: !results.length ? `No matching results for "${query}"` : "",
           loading: false,
         });
       }

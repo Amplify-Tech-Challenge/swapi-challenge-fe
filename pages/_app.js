@@ -4,7 +4,6 @@ import SearchBar from '../components/SearchBar'
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <SearchBar />
       <Component {...pageProps} />
     </>
   )

@@ -14,21 +14,18 @@ export default function Home() {
         <h1 className={styles.title}>
           <p>Welcome to Make Love not Star Wars</p>
         </h1>
-        <Link href={`/characters/`}>
-          <h2 style={{ cursor: "pointer" }}>Characters screen</h2>
-        </Link>
-
-        <p className={styles.description}>
-          styles.description <code className={styles.code}>styles.code</code>
-        </p>
 
         <div className={styles.grid}>
-          <a href="" className={styles.card}>
-            <h3>h3 styles.card in a grid &rarr;</h3>
-            <p>p styles.card</p>
+          <a href="/characters/" className={styles.card}>
+            <h3>Character Search &rarr;</h3>
+            <p>search for characters by name</p>
           </a>
         </div>
       </main>
+
+      <p className={styles.description}>
+        styles.description <code className={styles.code}>styles.code</code>
+      </p>
 
       <footer className={styles.footer}>
         <a href="" target="_blank" rel="noopener noreferrer">
