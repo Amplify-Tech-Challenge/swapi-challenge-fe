@@ -1,8 +1,5 @@
-// import React from 'react'
 import "@testing-library/jest-dom";
-import { render, screen, waitFor, cleanup } from "@testing-library/react";
-// import { MemoryRouter } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
+import { render, screen, cleanup } from "@testing-library/react";
 import CharacterCard from './CharacterCard'
 import {character} from './testData'
 

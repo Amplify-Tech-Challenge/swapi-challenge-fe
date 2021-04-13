@@ -1,36 +1,43 @@
-// import "@testing-library/jest-dom";
-// import React from 'react'
-// import { render, screen, waitFor, cleanup } from "@testing-library/react";
-// import { MemoryRouter } from "react-router-dom";
-// import userEvent from "@testing-library/user-event";
-// import CharacterCard from './CharacterCard'
-// import character from './testData'
+import "@testing-library/jest-dom";
+import { render, screen, cleanup } from "@testing-library/react";
+import CharacterBio from './CharacterBio'
+import {character} from './testData'
 
-// afterEach(cleanup);
+afterEach(cleanup);
 
-// describe("CharacterCard", () => {
-//   it("Elements render properly", () => {
-   
-//     render(
-//       <MemoryRouter>
-//         <CharacterCard props={character}/>
-//       </MemoryRouter>
-//     );
+describe("CharacterBio", () => {
+  it("Elements render properly", () => {
+    render(
+      <CharacterBio character={character} />
+    );
+    
+    const name = screen.getByRole('heading', { name: /luke skywalker/i })
+    const image = screen.getByRole('img', { name: /luke skywalker/i })
+    const dob = screen.getByText('Born: 19BBY')
+    const height = screen.getByText('Height: 172 cm')
+    const weight = screen.getByText('Weight: 77 kg')
+    const hair = screen.getByText('Hair: blond')
+    const skin = screen.getByText('Skin: fair')
+    const eyes = screen.getByText('Eyes: blue')
+    const species = screen.getByText('Species: Human')
+    const homeworld = screen.getByText('Homeworld: Tatooine')
+    const movies = screen.getByText('Appears in: 1st A New Hope')
+    const starships = screen.getByText('Starships: X-wing')
+    const vehicles = screen.getByText('Vehicles: Snowspeeder')
 
-//       // const dob = screen.queryByText('Mulan')
-//       // const height = screen.queryByText("Release Date 2020-09-04")
-//       // const weight = screen.queryByRole("link", { name: /337401 poster/i })
-//       // const weight = screen.queryByRole("link", { name: /337401 poster/i })
-//       // const weight = screen.queryByRole("link", { name: /337401 poster/i })
-//       // const weight = screen.queryByRole("link", { name: /337401 poster/i })
-//       // const weight = screen.queryByRole("link", { name: /337401 poster/i })
-//       // const weight = screen.queryByRole("link", { name: /337401 poster/i })
-//       // const weight = screen.queryByRole("link", { name: /337401 poster/i })
-//       // const weight = screen.queryByRole("link", { name: /337401 poster/i })
-//       // const weight = screen.queryByRole("link", { name: /337401 poster/i })
-  
-//       // expect(movieTitle).toBeInTheDocument();
-//       // expect(releaseDate).toBeInTheDocument();
-//       // expect(imageLink).toBeInTheDocument();
-//   });
-// });
+    expect(name).toBeInTheDocument();
+    expect(image).toBeInTheDocument();
+    expect(dob).toBeInTheDocument();
+    expect(height).toBeInTheDocument();
+    expect(weight).toBeInTheDocument();
+    expect(hair).toBeInTheDocument();
+    expect(skin).toBeInTheDocument();
+    expect(eyes).toBeInTheDocument();
+    expect(species).toBeInTheDocument();
+    expect(homeworld).toBeInTheDocument();
+    expect(movies).toBeInTheDocument();
+    expect(starships).toBeInTheDocument();
+    expect(vehicles).toBeInTheDocument();
+  });
+
+});

@@ -13,6 +13,7 @@ const Character = ({ character }) => {
         <title>Bio | {character.name}</title>
       </Head>
       <main>
+        <h1>Character Bio</h1>
         <CharacterBio character={character} />
       </main>
     </>
