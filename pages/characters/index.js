@@ -7,9 +7,10 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 const CharacterList = () => {
   const [searchResults, setSearchResults] = useState([])
   const [noResults, setNoResults] = useState(null)
-  // console.log(searchResults)
+  const [previousSearchResults, setPreviousSearchResults] = useState([])
 
   const parseResults = (resultObject) => {
+    setPreviousSearchResults(searchResults)
     setSearchResults(resultObject?.results)
     resultObject.message ? setNoResults(resultObject.message) : setNoResults(null)
   }
@@ -31,6 +32,7 @@ const CharacterList = () => {
   };
 
   const showSearchState = () => {
+
     return <h1 className={styles.title}>{searchResults?.length ? 'Results' : noResults ? noResults : "Search by name above"}</h1>
   }
 
