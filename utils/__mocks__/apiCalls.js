@@ -1,4 +1,4 @@
-import {characters} from '../../pages/characters/testData'
+import {characters} from '../../components/testData'
 
 export const fetchLiveSearch = async (query, updatedPageNo = "") => {
   // const pageNo = updatedPageNo ? updatedPageNo : "";
