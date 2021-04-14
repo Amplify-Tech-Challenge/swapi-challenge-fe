@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen, cleanup } from "@testing-library/react";
 import CharacterCard from './CharacterCard'
-import {character} from './testData'
+import {character} from '../../tests/components/testData'
 
 afterEach(cleanup);
 

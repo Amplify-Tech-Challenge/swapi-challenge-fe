@@ -6,7 +6,7 @@ const CharacterCard = ({ character }) => {
   return (
     <Link key={character.name} href={`/characters/${character.id}`}>
       <div className={styles.grid}>
-        <a href="" className={styles.card}>
+        <a data-testid={`charactercard-${character.id}`} href="" className={styles.card}>
           <h3>{character.name}</h3>
           <img src={`${API_IMG_URL}/${character.id}.jpg`} alt={`a photo of ${character.name}`} />
         </a>
