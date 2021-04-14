@@ -14,13 +14,12 @@ const Results = styled.ul`
   display: flex;
   flex-direction: column;
   flex-flow: wrap;
-  margin-top: 0;
+  margin: 0;
+  padding: 0;
   background: gray;
   list-style-type: none;
-  align-items: center
-  justify-content: center;
-  padding: 0;
-`;
+  justify-content: center !important;
+  `;
 const Title = styled.span`
   background: inherit;
 `
