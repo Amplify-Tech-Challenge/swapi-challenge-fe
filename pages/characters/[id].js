@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
-import CharacterBio from "../../components/CharacterBio";
+import CharacterBio from "../../components/CharacterBio/CharacterBio";
 const API_URL = process.env.RESTURL_MYAPI
 
 const Character = ({ character }) => {
-  console.log(character)
+  // console.log(character)
 
   return (
     <>
@@ -13,6 +13,7 @@ const Character = ({ character }) => {
         <title>Bio | {character.name}</title>
       </Head>
       <main>
+        <h1>Character Bio</h1>
         <CharacterBio character={character} />
       </main>
     </>

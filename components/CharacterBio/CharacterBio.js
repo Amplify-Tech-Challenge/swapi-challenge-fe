@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 
 const CharacterBio = ({ character }) => {
   const {
@@ -19,11 +19,8 @@ const CharacterBio = ({ character }) => {
     image,
   } = character;
 
-  console.log(image);
-
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Character Profile</h1>
       <h1 className={styles.title}>{name}</h1>
       <img src={image} alt={name} />
       <main className={styles.main}>

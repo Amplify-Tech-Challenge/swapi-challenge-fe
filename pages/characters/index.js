@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import CharacterCard from "../../components/CharacterCard";
+import CharacterCard from "../../components/CharacterCard/CharacterCard";
 const API_URL = process.env.RESTURL_MYAPI;
 import styles from "../../styles/Home.module.css";
-import SearchBar from "../../components/SearchBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const CharacterList = ({ characters }) => {
   const [searchResults, setSearchResults] = useState([])
   const [noResults, setNoResults] = useState(null)
+  // console.log(searchResults)
 
   const parseResults = (resultObject) => {
-    setSearchResults(resultObject.results)
+    setSearchResults(resultObject?.results)
     resultObject.message ? setNoResults(resultObject.message) : setNoResults(null)
   }
 
@@ -20,7 +21,7 @@ const CharacterList = ({ characters }) => {
       return id;
     };
 
-    if (searchResults.length) {
+    if (searchResults?.length) {
       return searchResults.map(c => {
         const id = getId(c.url);
         const characterData = { ...c, id };
@@ -34,7 +35,7 @@ const CharacterList = ({ characters }) => {
       <SearchBar getResults={parseResults}/>
       <div className={styles.container}>
         {/* TODO break out into separate function to add 'loading'  */}
-        <h1 className={styles.title}>{searchResults.length ? 'Results' : noResults ? noResults : "Search by name above"}</h1>
+        <h1 className={styles.title}>{searchResults?.length ? 'Results' : noResults ? noResults : "Search by name above"}</h1>
         {makeCharacterList()}
       </div>
     </>

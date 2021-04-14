@@ -1,5 +1,6 @@
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
+const API_IMG_URL = process.env.RESTURL_IMAGEAPI
 
 const CharacterCard = ({ character }) => {
   return (
@@ -7,6 +8,7 @@ const CharacterCard = ({ character }) => {
       <div className={styles.grid}>
         <a href="" className={styles.card}>
           <h3>{character.name}</h3>
+          <img src={`${API_IMG_URL}/${character.id}.jpg`} alt={`a photo of ${character.name}`} />
         </a>
       </div>
     </Link>

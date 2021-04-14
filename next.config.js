@@ -16,13 +16,21 @@ module.exports = (phase) => {
   console.log(`isDev:${isDev}  isProd:${isProd}   isStaging:${isStaging}`)
 
   const env = {
+    RESTURL_IMAGEAPI: (() => {
+      if (isDev) return 'http://localhost:4000/assets/images/characters'
+      if (isProd) {
+        return 'https://swapi-express-gateway.herokuapp.com/assets/images/characters'
+      }
+      if (isStaging) return 'https://swapi-express-gateway.herokuapp.com/assets/images/characters'
+      return 'RESTURL_IMAGEAPI:not (isDev,isProd && !isStaging,isProd && isStaging)'
+    })(),
     RESTURL_MYAPI: (() => {
       if (isDev) return 'http://localhost:4000/api'
       if (isProd) {
         return 'https://swapi-express-gateway.herokuapp.com/api'
       }
       if (isStaging) return 'https://swapi-express-gateway.herokuapp.com/api'
-      return 'RESTURL_SPEAKERS:not (isDev,isProd && !isStaging,isProd && isStaging)'
+      return 'RESTURL_MYAPI:not (isDev,isProd && !isStaging,isProd && isStaging)'
     })()
   }
   
