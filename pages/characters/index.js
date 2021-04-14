@@ -4,7 +4,7 @@ const API_URL = process.env.RESTURL_MYAPI;
 import styles from "../../styles/Home.module.css";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
-const CharacterList = ({ characters }) => {
+const CharacterList = () => {
   const [searchResults, setSearchResults] = useState([])
   const [noResults, setNoResults] = useState(null)
   // console.log(searchResults)
@@ -30,28 +30,32 @@ const CharacterList = ({ characters }) => {
     }
   };
 
+  const showSearchState = () => {
+    return <h1 className={styles.title}>{searchResults?.length ? 'Results' : noResults ? noResults : "Search by name above"}</h1>
+  }
+
   return (
     <>
       <SearchBar getResults={parseResults}/>
       <div className={styles.container}>
         {/* TODO break out into separate function to add 'loading'  */}
-        <h1 className={styles.title}>{searchResults?.length ? 'Results' : noResults ? noResults : "Search by name above"}</h1>
+        {showSearchState()}
         {makeCharacterList()}
       </div>
     </>
   );
 };
 
-export const getStaticProps = async () => {
-  // will load up a page of movies, can append more with 'load more'
-  // search field will make api call and load SW card components with information/cancel previously typed letter
+// export const getStaticProps = async () => {
+//   // will load up a page of movies, can append more with 'load more'
+//   // search field will make api call and load SW card components with information/cancel previously typed letter
 
-  const request = await fetch(`${API_URL}/characters/`);
-  const data = await request.json();
+//   const request = await fetch(`${API_URL}/characters/`);
+//   const data = await request.json();
 
-  return {
-    props: { characters: data },
-  };
-};
+//   return {
+//     props: { characters: data },
+//   };
+// };
 
 export default CharacterList;

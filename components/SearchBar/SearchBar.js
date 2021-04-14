@@ -36,32 +36,6 @@ const SearchBar = ({getResults}) => {
     }
   };
 
-  // const fetchLiveSearch = async (query, updatedPageNo = "") => {
-  //   const pageNo = updatedPageNo ? updatedPageNo : "";
-  //   const apiEndpoint = `https://swapi.py4e.com/api/people/?search=${query}&page=${pageNo}`;
-
-  //   try {
-  //     const response = await fetch(apiEndpoint);
-  //     const data = await response.json();
-  //     const results = data.results;
-
-  //     if (results) {
-  //       setState({
-  //         results,
-  //         message: !results.length ? `No matching results for "${query}"` : "",
-  //         loading: false,
-  //       });
-  //     }
-
-  //   } catch (error) {
-  //     setState({
-  //       loading: false,
-  //       message:
-  //         "Failed to fetch results. Please check network. Error: " + error,
-  //     });
-  //   }
-  // };
-
   return (
     <SearchContainer>
       <SearchInput
