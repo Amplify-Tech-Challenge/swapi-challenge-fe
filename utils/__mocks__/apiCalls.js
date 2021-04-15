@@ -1,18 +1,14 @@
-import {characters} from '../../components/testData'
+import {characters} from '../../tests/testData'
 
 export const fetchLiveSearch = async (query, updatedPageNo = "") => {
-  // const pageNo = updatedPageNo ? updatedPageNo : "";
-  // const apiEndpoint = `https://swapi.py4e.com/api/people/?search=${query}&page=${pageNo}`;
-  
-  // try {
-
-    const results = characters.filter(c => c.name.includes(query))
-
-    // const response = await fetch(apiEndpoint);
-    // const data = await response.json();
-    // const results = data.results;
-
-    if (results) {
+    const results = await characters.filter(c => c.name.includes(query))
+    const resultObj = results.map(c => {
+      const urlsplit = c.url.split('/')
+      const obj = {name: c.name, url: urlsplit[urlsplit.length - 2]}
+      return obj
+    })
+    const orderedList = resultObj.sort((a, b) => a.url - b.url)
+    if (orderedList) {
       const stateObject = {
         results,
         message: !results.length ? `No matching results for "${query}"` : "",
@@ -20,13 +16,4 @@ export const fetchLiveSearch = async (query, updatedPageNo = "") => {
       }
       return stateObject;
     }
-    
-  // } catch (error) {
-  //   const stateObject = {
-  //     loading: false,
-  //     message:
-  //       "Failed to fetch results. Please check network. Error: " + error,
-  //   }
-  //   return stateObject;
-  // }
 };
