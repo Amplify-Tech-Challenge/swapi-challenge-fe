@@ -1,12 +1,12 @@
+const API_URL = process.env.RESTURL_MYAPI;
+
 export const fetchLiveSearch = async (query, updatedPageNo = "") => {
   const pageNo = updatedPageNo ? updatedPageNo : "";
-  const apiEndpoint = `https://swapi.py4e.com/api/people/?search=${query}&page=${pageNo}`;
+  const apiEndpoint = `${API_URL}/characters/?search=${query}&page=${pageNo}`;
   
   try {
     const response = await fetch(apiEndpoint);
-    const data = await response.json();
-    const results = data.results;
-
+    const results = await response.json();
     if (results) {
       const stateObject = {
         results,
