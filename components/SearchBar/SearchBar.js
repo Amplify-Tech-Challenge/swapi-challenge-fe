@@ -19,16 +19,10 @@ const SearchBar = ({getResults}) => {
   useEffect(() => {
     getResults(state)
   }, [() => setInputString()])
-
-  useEffect(async () => {
-    const lastSearched = await JSON.parse(localStorage.getItem("swapi-search"));
-    if (lastSearched?.length) handleChange(lastSearched);
-  }, [])
   
   const handleChange = async (query) => {
     setInputString(query);
     setState({ loading: true, message: '', results: [] });
-    localStorage.setItem("swapi-search", JSON.stringify(query));
 
     if (query !== "") {
       const result = await fetchLiveSearch(query, "")

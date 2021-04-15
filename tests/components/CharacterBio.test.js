@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen, cleanup } from "@testing-library/react";
-import CharacterBio from './CharacterBio'
-import {character} from './testData'
+import CharacterBio from '../../components/CharacterBio/CharacterBio'
+import {character} from '../testData'
 
 afterEach(cleanup);
 

@@ -1,7 +1,5 @@
 import Link from "next/link";
-import styles from "../../styles/Home.module.css";
 import styled from "styled-components";
-const API_IMG_URL = process.env.RESTURL_IMAGEAPI
 
 const Image = styled.img`
   height: 50vh;
@@ -27,10 +25,10 @@ const Card = styled.article`
 
 const CharacterCard = ({ character }) => {
   return (
-    <Link key={character.name} href={`/characters/${character.id}`}>
+    <Link key={character.id} href={`/characters/${character.id}`}>
       <Card>
         <h3>{character.name}</h3>
-        <Image src={`${API_IMG_URL}/${character.id}.jpg`} alt={`a photo of ${character.name}`} />
+        <Image src={character.image} alt={`a photo of ${character.name}`} />
       </Card>
     </Link>
   );

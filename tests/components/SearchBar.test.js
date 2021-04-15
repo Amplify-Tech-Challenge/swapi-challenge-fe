@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import React from 'react';
 import { render, screen, waitFor, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import SearchBar from "./SearchBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import {fetchLiveSearch} from '../../utils/apiCalls'
 jest.mock('../../utils/apiCalls.js')
 
