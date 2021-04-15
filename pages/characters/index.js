@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CharacterCard from "../../components/CharacterCard/CharacterCard";
 import styles from "../../styles/Home.module.css";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import styled from "styled-components";
-const API_URL = process.env.RESTURL_MYAPI;
 
 const Main = styled.main`
   display: flex;
   flex-direction: column;
   background: gray;
+  height: 100vh;
   `;
 const Results = styled.ul`
   display: flex;
@@ -38,25 +38,11 @@ const CharacterList = () => {
   };
 
   const makeCharacterList = () => {
-    console.log('list fire')
-    const getId = url => {
-      const splitUrl = url.split("/");
-      const id = splitUrl[splitUrl.length - 2];
-      return id;
-    };
-
-    // if (previousSearchResults.length && !searchResults) {
-    //   return previousSearchResults.map(c => {
-    //     const id = getId(c.url);
-    //     const characterData = { ...c, id };
-    //     return <CharacterCard key={Math.random()} character={characterData} />;
-    //   });
-    // } else
-    if (searchResults.length) {
+    if (searchResults?.length) {
       return searchResults.map(c => {
-        const id = getId(c.url);
+        const id = c.id;
         const characterData = { ...c, id };
-        return <li><CharacterCard key={Math.random()} character={characterData} /></li>;
+        return <li key={Math.random()}><CharacterCard character={characterData} /></li>;
       });
     }
   };
