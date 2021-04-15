@@ -24,32 +24,29 @@ describe("CharacterList in index.js", () => {
     expect(searchBar).toBeInTheDocument();
   });
 
-  // it("user query should pull up correct result", async () => {
-  //   const mockedGetStaticProps = () => jest.isMockFunction(getStaticProps)
-  //   mockedGetStaticProps(characters)
+  it("user query should pull up correct result", async () => {
+    const mockedGetStaticProps = () => jest.isMockFunction(getStaticProps)
+    mockedGetStaticProps(characters)
 
-  //   act(() => {
-  //     render(
-  //       <MemoryRouter>
-  //         <CharacterList characters={characters}/>
-  //       </MemoryRouter>
-  //     );
-  //   })
+    act(() => {
+      render(
+        <MemoryRouter>
+          <CharacterList characters={characters}/>
+        </MemoryRouter>
+      );
+    })
 
-  //   const message = screen.queryByRole('heading', { name: /search by name above/i })
-  //   const searchBar = screen.getByRole("textbox", {name: /character search bar/i});
-  //   expect(message).toBeInTheDocument();
-  //   expect(searchBar).toBeInTheDocument();
-
-  //   userEvent.type((searchBar), 'Luke Skywalker')
-  //   const searchTerm = screen.getByDisplayValue('Luke Skywalker')
-  //   expect(searchTerm).toBeInTheDocument()
-
-  //   const characterCard = await waitFor(() => screen.queryByTestId('charactercard-1'))
-  //   screen.debug()
-  //   expect(characterCard).toBeInTheDocument()
+    const message = screen.queryByRole('heading', { name: /search by name above/i })
+    const searchBar = screen.getByRole("textbox", {name: /character search bar/i});
+    expect(message).toBeInTheDocument();
+    expect(searchBar).toBeInTheDocument();
+    await waitFor(() => userEvent.type((searchBar), 'Luke Skywalker'))
     
-  // });
+    await waitFor(async () => {
+      const characterCard = screen.queryByRole('link', { name: /luke skywalker a photo of luke skywalker/i })
+      await expect(characterCard).toBeInTheDocument()
+    })   
+  });
 
   // it("on refresh or navigation away and back, input should persist", async () => {
   //   const mockGetResults = jest.fn();
