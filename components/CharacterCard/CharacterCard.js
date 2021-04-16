@@ -1,11 +1,28 @@
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-const Image = styled.img`
-  height: 50vh;
-  border-radius: 5pc;
-`
+const Fade = keyframes`
+  from {
+    background: white;
+    transform: translateY(-.3em);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0em);
+    opacity: 1;
+  }
+`;
+const FadePic = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: .5;
+  }
+`;
+
 const Card = styled.article`
+  animation: ${Fade} 1s ease;
   margin: 1rem;
   flex-basis: 45%;
   padding: 1.5rem;
@@ -14,14 +31,30 @@ const Card = styled.article`
   text-decoration: none;
   border: 3px solid #eaeaea;
   border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.3s ease, border-color 0.3s ease, transform .3s ease;
   cursor: pointer;
     &:focus, &:hover, &:active {
       color: #0070f3;
       border-color: #0070f3;
+      transform: translateY(-.3em);
     }
 }
-`
+`;
+
+const Image = styled.img`
+  opacity: 0.5;
+  height: 100%;
+  // height: 50vh;
+  border-radius: 5pc;
+  animation: ${FadePic} 1.5s ease;
+  transition: all .3s ease;
+  will-change: opacity;
+  ${Card}:focus &,
+  ${Card}:hover &,
+  ${Card}:active & {
+    opacity: 1;
+  }
+`;
 
 const CharacterCard = ({ character }) => {
   return (
