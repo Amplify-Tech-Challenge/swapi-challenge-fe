@@ -7,7 +7,9 @@ export const fetchLiveSearch = async (query, updatedPageNo = "") => {
       const obj = {name: c.name, url: urlsplit[urlsplit.length - 2]}
       return obj
     })
+
     const orderedList = resultObj.sort((a, b) => a.url - b.url)
+    
     if (orderedList) {
       const stateObject = {
         results,

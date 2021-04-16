@@ -12,18 +12,24 @@ const SearchInput = styled.input`
   padding: 1em;
 `;
 
-const SearchBar = ({getResults}) => {
+
+const SearchBar = ({getResults, loadPreviousSearch}) => {
   const [inputString, setInputString] = useState("");
   const [state, setState] = useState({results:[]});
+  
+  useEffect(async () => {
+    const lastSearched = await JSON.parse(localStorage.getItem("swapi-search"));
+    if (lastSearched?.length) loadPreviousSearch(lastSearched);
+  }, [])
 
   useEffect(() => {
-    getResults(state)
+    getResults({...state, query: inputString})
   }, [() => setInputString()])
   
   const handleChange = async (query) => {
     setInputString(query);
-    setState({ loading: true, message: '', results: [] });
-
+    setState({ message: '', results: [] });
+    
     if (query !== "") {
       const result = await fetchLiveSearch(query, "")
       setState(result)

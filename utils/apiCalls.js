@@ -11,14 +11,12 @@ export const fetchLiveSearch = async (query, updatedPageNo = "") => {
       const stateObject = {
         results,
         message: !results.length ? `No matching results for "${query}"` : "",
-        loading: false,
       }
       return stateObject;
     }
     
   } catch (error) {
     const stateObject = {
-      loading: false,
       message:
         "Failed to fetch results. Please check network. Error: " + error,
     }
