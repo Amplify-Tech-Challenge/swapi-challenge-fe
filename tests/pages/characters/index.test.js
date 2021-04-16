@@ -10,6 +10,7 @@ jest.mock('../../../utils/apiCalls.js')
 afterEach(cleanup);
 
 describe("CharacterList in index.js", () => {
+  localStorage.clear();
 
   it("Elements render properly", () => {
     act(() => {
@@ -19,7 +20,7 @@ describe("CharacterList in index.js", () => {
     })
     const callToAction = screen.queryByRole('heading', { name: /search by name above/i })
     const searchBar = screen.getByRole("textbox", {name: /character search bar/i});
-
+    screen.debug()
     expect(callToAction).toBeInTheDocument();
     expect(searchBar).toBeInTheDocument();
   });
