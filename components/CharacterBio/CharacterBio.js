@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { useRouter } from 'next/router'
 
 const Bio = styled.article`
   color: white;
@@ -6,6 +7,7 @@ const Bio = styled.article`
   // padding: 0 4.5vw;
   display: flex;
   align-items: center;
+  margin-top: 2em;
 `;
 const CharacterDetails = styled.div`
   width: 80vw;
@@ -22,9 +24,16 @@ const DetailBlock = styled.div`
 const Detail = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 0 1em;
-  &:p {
-    font-weight: bold
+  h3 {
+    font-weight: bold;
+    text-decoration: underline;
+    line-height: 1;
+  }
+  p {
+    font-style: italic;
+    line-height: 1;
   }
 `;
 const ImgContainer = styled.div`
@@ -46,6 +55,31 @@ const NameWrapper = styled.div`
   z-index: 5;
   background-color: black;
 `;
+const ArrowContainer = styled.div`
+  position: absolute;
+  top: 1em;
+  display: flex;
+  width: fit-content;
+  cursor: pointer;
+  &:hover {
+    color: gold;
+  }
+`;
+const Arrow = styled.div`
+  margin: 0.5em 0;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  p:nth-child(1) {
+    font-size: 3em;
+    font-weight: bolder;
+    padding-right: 1rem;
+  }
+  p:nth-child(2) {
+    font-size: 2em;
+    font-weight: bolder;
+  }
+`;
 
 const CharacterBio = ({ character }) => {
   const {
@@ -62,8 +96,16 @@ const CharacterBio = ({ character }) => {
     image,
   } = character;
 
+  const router = useRouter()
+
   return (
     <Bio>
+      <ArrowContainer onClick={() => router.back()}>
+        <Arrow>
+          <p>&#10094;</p>
+          <p>back</p>
+        </Arrow>
+      </ArrowContainer>
       <ImgContainer>
         <NameWrapper>
           <ImgTitle>{name}</ImgTitle>
@@ -74,27 +116,27 @@ const CharacterBio = ({ character }) => {
         <h2>Biological Details</h2>
         <DetailBlock>
           <Detail>
-            <p>Species</p>
+            <h3>Species</h3>
             <p>{species[0]?.name}</p>
           </Detail>
           <Detail>
-            <p>Born</p>
+            <h3>Born</h3>
             <p>{birth_year}</p>
           </Detail>
           <Detail>
-            <p>Height</p>
+            <h3>Height</h3>
             <p>{height} cm</p>
           </Detail>
           <Detail>
-            <p>Weight</p>
+            <h3>Weight</h3>
             <p>{mass} kg</p>
           </Detail>
           <Detail>
-            <p>Hair</p>
+            <h3>Hair</h3>
             <p>{hair_color}</p>
           </Detail>
           <Detail>
-            <p>Homeworld</p>
+            <h3>Homeworld</h3>
             <p>{homeworld.name}</p>
           </Detail>
         </DetailBlock>
