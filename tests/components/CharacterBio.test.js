@@ -13,17 +13,15 @@ describe("CharacterBio", () => {
     
     const name = screen.getByRole('heading', { name: /luke skywalker/i })
     const image = screen.getByRole('img', { name: /luke skywalker/i })
-    const dob = screen.getByText('Born: 19BBY')
-    const height = screen.getByText('Height: 172 cm')
-    const weight = screen.getByText('Weight: 77 kg')
-    const hair = screen.getByText('Hair: blond')
-    const skin = screen.getByText('Skin: fair')
-    const eyes = screen.getByText('Eyes: blue')
-    const species = screen.getByText('Species: Human')
-    const homeworld = screen.getByText('Homeworld: Tatooine')
-    const movies = screen.getByText('Appears in: 1st A New Hope')
-    const starships = screen.getByText('Starships: X-wing')
-    const vehicles = screen.getByText('Vehicles: Snowspeeder')
+    const dob = screen.getByText('19BBY')
+    const height = screen.getByText('172 cm')
+    const weight = screen.getByText('77 kg')
+    const hair = screen.getByText('blond')
+    const species = screen.getByText('Human')
+    const homeworld = screen.getByText('Tatooine')
+    const movies = screen.getByText('A New Hope')
+    const starships = screen.getByText('X-wing')
+    const vehicles = screen.getByText('Snowspeeder')
 
     expect(name).toBeInTheDocument();
     expect(image).toBeInTheDocument();
@@ -31,8 +29,6 @@ describe("CharacterBio", () => {
     expect(height).toBeInTheDocument();
     expect(weight).toBeInTheDocument();
     expect(hair).toBeInTheDocument();
-    expect(skin).toBeInTheDocument();
-    expect(eyes).toBeInTheDocument();
     expect(species).toBeInTheDocument();
     expect(homeworld).toBeInTheDocument();
     expect(movies).toBeInTheDocument();

@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen, waitFor, cleanup } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import CharacterList, {getStaticProps} from "../../../pages/characters/index";
 import {characters} from '../../testData'
@@ -20,7 +20,6 @@ describe("CharacterList in index.js", () => {
     })
     const callToAction = screen.queryByRole('heading', { name: /search by name above/i })
     const searchBar = screen.getByRole("textbox", {name: /character search bar/i});
-    screen.debug()
     expect(callToAction).toBeInTheDocument();
     expect(searchBar).toBeInTheDocument();
   });
@@ -82,5 +81,4 @@ describe("CharacterList in index.js", () => {
       await expect(characterCard10).toBeInTheDocument()
     })   
   });
-
 });

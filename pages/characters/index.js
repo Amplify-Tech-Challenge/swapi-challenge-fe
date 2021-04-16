@@ -3,12 +3,17 @@ import CharacterCard from "../../components/CharacterCard/CharacterCard";
 import styles from "../../styles/Home.module.css";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import styled from "styled-components";
+const API_IMG = process.env.RESTURL_IMAGEAPI
 
 const Main = styled.main`
   display: flex;
   flex-direction: column;
   background: gray;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  background-image: url("${API_IMG}/bg.jpg");
+  background-size: cover;
+  backdrop-filter: blur(12px);
 `;
 const Results = styled.ul`
   display: flex;
@@ -16,12 +21,11 @@ const Results = styled.ul`
   flex-flow: wrap;
   margin: 0;
   padding: 0;
-  background: gray;
   list-style-type: none;
   justify-content: center !important;
 `;
 const Title = styled.span`
-  background: inherit;
+  margin: 2em 0;
 `;
 
 const CharacterList = () => {

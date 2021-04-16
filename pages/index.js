@@ -22,16 +22,6 @@ export default function Home() {
           </a>
         </div>
       </main>
-
-      <p className={styles.description}>
-        styles.description <code className={styles.code}>styles.code</code>
-      </p>
-
-      <footer className={styles.footer}>
-        <a href="" target="_blank" rel="noopener noreferrer">
-          styles.footer
-        </a>
-      </footer>
     </div>
   );
 }

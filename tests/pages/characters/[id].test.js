@@ -11,7 +11,7 @@ describe("Character in [id].js", () => {
       <Character character={character} />
     );
     
-    const title = screen.queryByRole('heading', { name: /character bio/i })
+    const title = screen.getByRole('heading', { name: /luke skywalker/i })
     expect(title).toBeInTheDocument()
   });
 });
