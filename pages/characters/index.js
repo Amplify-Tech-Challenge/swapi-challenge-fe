@@ -62,11 +62,11 @@ const CharacterList = () => {
   const showSearchState = () => {
     if (noResults) {
       return <h1 className={styles.title}>{noResults}</h1>;
-    } else if (newSearch && !searchResults.length) {
-      return <h1 className={styles.title}>Search by name above</h1>;
     } else if (previousResults.length && !searchResults.length && !newSearch) {
       return <h1 className={styles.title}>Previous Results</h1>;
-    } else {
+    } else if (!searchResults.length) {
+      return <h1 className={styles.title}>Search by name above</h1>;
+    } else if (searchResults.length) {
       return <h1 className={styles.title}>Results</h1>;
     }
   };
