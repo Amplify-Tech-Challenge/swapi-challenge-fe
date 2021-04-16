@@ -24,18 +24,24 @@ const FadePic = keyframes`
 const Card = styled.article`
   animation: ${Fade} 1s ease;
   margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   flex-basis: 45%;
   padding: 1.5rem;
-  text-align: left;
   color: #fff;
   text-decoration: none;
   border: 3px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.3s ease, border-color 0.3s ease, transform .3s ease;
+  h2 {
+    line-height: 1;
+    margin-top: 0;
+  }
   cursor: pointer;
     &:focus, &:hover, &:active {
-      color: #0070f3;
-      border-color: #0070f3;
+      color: gold;
+      border-color: gold;
       transform: translateY(-.3em);
     }
 }
@@ -43,8 +49,8 @@ const Card = styled.article`
 
 const Image = styled.img`
   opacity: 0.5;
-  height: 100%;
-  // height: 50vh;
+  // height: 100%;
+  height: 65vh;
   border-radius: 5pc;
   animation: ${FadePic} 1.5s ease;
   transition: all .3s ease;
@@ -60,7 +66,7 @@ const CharacterCard = ({ character }) => {
   return (
     <Link key={character.id} href={`/characters/${character.id}`}>
       <Card>
-        <h3>{character.name}</h3>
+        <h2>{character.name}</h2>
         <Image src={character.image} alt={`a photo of ${character.name}`} />
       </Card>
     </Link>

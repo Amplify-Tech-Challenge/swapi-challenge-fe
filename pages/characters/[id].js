@@ -41,31 +41,34 @@ const PageWrapper = styled.div`
   display: flex;
   height: max-content;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background: black;
 `;
 const BgWrapper = styled.div`
   overflow: hidden;
   width: -webkit-fill-available;
   animation: ${Blur} 2s ease;
-  max-height: fit-content;
+  min-height: 100vh;
+  height: 100%;
 `;
 const Background = styled.div`
-  height: 100vh;
-  background-size: cover;
+  min-height: 100vh;
+  height: 100%;
+  background-size: 100%;
   animation: ${Kenburns} 10s ease-out both;
   background-image: url("${API_IMG}/biobg.jpg");
   filter: blur(3px);
   -webkit-filter: blur(3px);
 `;
 
-const Main = styled.main`
+const Gradient = styled.div`
   position: absolute;
   min-height: 100vh;
-  height: 100%;
   width: 100vw;
   display: flex;
   width: -webkit-fill-available;
+  height: fit-content;
   background-image: linear-gradient(
     to left,
     rgba(7, 0, 84, 0.289),
@@ -75,8 +78,10 @@ const Main = styled.main`
 const Content = styled.section`
   animation: ${Fade} 5s ease;
   width: 100%;
-  padding: 3em 8em;
+  padding: 0vh 8vw;
   align-self: center;
+  min-height: 100vh;
+  height: 100%;
 `;
 
 const Character = ({ character }) => {
@@ -88,11 +93,11 @@ const Character = ({ character }) => {
       <BgWrapper>
         <Background />
       </BgWrapper>
-      <Main>
+      <Gradient>
         <Content>
           <CharacterBio character={character} />
         </Content>
-      </Main>
+      </Gradient>
     </PageWrapper>
   );
 };
